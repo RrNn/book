@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import { loginUser, clearCredentialMessages } from "../actions/login";
 import { signUpUser } from "../actions/signup";
 
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
-class LoginForm extends React.Component {
+export class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -152,7 +152,12 @@ class LoginForm extends React.Component {
               Sign in
             </button>
           </form>
-          <a href="" onClick={this.toggleInputs} className="text-white">
+          <a
+            id="toggler"
+            href=""
+            onClick={this.toggleInputs}
+            className="text-white"
+          >
             {this.state.signingUp ? (
               <span>Already have an account? Login</span>
             ) : (

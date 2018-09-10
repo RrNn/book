@@ -23,38 +23,26 @@ export const getMeals = () => dispatch => {
   axios
     .get("/api/v1/meals/", config)
     .then(response => {
-      return dispatch(gotMeals(response.data));
+      return dispatch({ type: GET_MEALS, payload: response.data });
     })
     .catch(error => {
       redirect(error.response.data);
     });
 };
 
-const gotMeals = data => ({
-  type: GET_MEALS,
-  payload: data
-});
-
 export const createMeal = data => dispatch => {
   axios
     .post("/api/v1/meals/", data, config)
     .then(response => {
-      return dispatch(mealCreated(response.data));
+      return dispatch({ type: CREATE_MEAL, payload: response.data });
     })
     .catch(error => {
-      return dispatch(mealCreationError(error.response.data));
+      return dispatch({
+        type: CREATE_MEAL_ERROR,
+        payload: error.response.data
+      });
     });
 };
-
-export const mealCreated = data => ({
-  type: CREATE_MEAL,
-  payload: data
-});
-
-export const mealCreationError = data => ({
-  type: CREATE_MEAL_ERROR,
-  payload: data
-});
 
 export const clearMealMessages = () => ({
   type: CLEAR_MEAL_MESSAGES
@@ -72,14 +60,9 @@ export const editMeal = data => dispatch => {
       return dispatch({ type: EDIT_MEAL, payload: response.data });
     })
     .catch(error => {
-      return dispatch(mealEditError(error.response.data));
+      return dispatch({ type: EDIT_MEAL_ERROR, payload: error.response.data });
     });
 };
-
-export const mealEditError = data => ({
-  type: EDIT_MEAL_ERROR,
-  payload: data
-});
 
 export const finishEdit = () => ({
   type: FINISH_EDITING_MEAL
@@ -89,7 +72,7 @@ export const deleteMeal = data => dispatch => {
   axios
     .delete("/api/v1/meals/" + data, config)
     .then(response => {
-      return dispatch(mealDeleted(response.data));
+      return dispatch({ type: MEAL_DELETED, payload: response.data });
     })
     .catch(error => {
       redirect(error.response.data);
@@ -99,8 +82,3 @@ export const deleteMeal = data => dispatch => {
       });
     });
 };
-
-export const mealDeleted = data => ({
-  type: MEAL_DELETED,
-  payload: data
-});

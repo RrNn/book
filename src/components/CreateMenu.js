@@ -3,10 +3,8 @@ import "../index.css";
 import { connect } from "react-redux";
 import { getMeals } from "../actions/meals";
 import { getMenus, createMenu, clearMenuMessages } from "../actions/menus";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
-class CreateMenu extends React.Component {
+export class CreateMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,19 +41,28 @@ class CreateMenu extends React.Component {
     this.props.createMenu(this.state);
   }
 
+  hideMessages() {
+    setTimeout(() => {
+      this.setState({
+        create_success: "",
+        create_error: ""
+      });
+    }, 5000);
+  }
+
   componentWillReceiveProps(props) {
     const { success_message } = props;
     const { error_message } = props;
     if (success_message) {
-      toast.success(success_message);
+      this.setState({ create_success: success_message });
     } else if (error_message) {
-      toast.error(error_message);
+      this.setState({ create_error: error_message });
     }
-    // this.props.clearMenuMessages();
+    this.props.clearMenuMessages();
+    this.hideMessages();
   }
 
   render() {
-    console.log(this.props);
     const meals = this.props.meals.map(meal => {
       let lower = meal.meal_option;
       let upperFirst = lower.charAt(0).toUpperCase() + lower.substr(1);
@@ -80,7 +87,10 @@ class CreateMenu extends React.Component {
       return (
         <div key={menu.id} className="card mb-1">
           <ul className="list-group list-group-flush">
-            <li className="list-group-item hover-grey">{menu.date}</li>
+            <li className="list-group-item hover-grey">
+              {menu.date}
+              &nbsp; ({menu.day})
+            </li>
           </ul>
         </div>
       );
@@ -95,6 +105,7 @@ class CreateMenu extends React.Component {
               <div className="form-group">
                 <div className="col-12 meal-option-list">
                   <input
+                    id="date"
                     className="form-control"
                     name="date"
                     value={this.state.date}
@@ -102,6 +113,15 @@ class CreateMenu extends React.Component {
                     type="date"
                   />
                 </div>
+                {this.state.create_success ? (
+                  <div class="col-12  text-center alert alert-info ">
+                    {this.state.create_success}
+                  </div>
+                ) : this.state.create_error ? (
+                  <div class="col-12  text-center alert alert-danger ">
+                    {this.state.create_error}
+                  </div>
+                ) : null}
               </div>
               <div className="form-group">
                 <select
@@ -136,8 +156,6 @@ class CreateMenu extends React.Component {
             {menus}
           </div>
         </div>
-
-        <ToastContainer />
       </div>
     );
   }

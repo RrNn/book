@@ -1,4 +1,4 @@
-@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+@import url("../node_modules/bootstrap/dist/css/bootstrap.css");
 
 card,
 input {
@@ -299,4 +299,8 @@ table.fixed td {
 
 .btn-sm {
   border-radius: 0 !important;
+}
+
+.bottom-shadow {
+  box-shadow: 1px 1px 1px grey;
 }

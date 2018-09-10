@@ -15,13 +15,13 @@ export const loginUser = data => dispatch => {
   axios
     .post("/api/v1/auth/login", data)
     .then(response => {
+      console.log(response.data);
+      dispatch(userLoggedIn(response.data));
       localStorage.setItem("token", response.data.access_token);
       localStorage.setItem("user_id", response.data.user_id);
       localStorage.setItem("is_admin", response.data.is_admin);
-      return dispatch(userLoggedIn(response.data));
     })
     .catch(error => {
-      console.log(error);
       return dispatch(loginError(error.response.data));
     });
 };

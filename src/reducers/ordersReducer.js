@@ -1,13 +1,10 @@
-import {
-  GET_ORDERS,
-  CREATE_ORDER,
-  CREATE_ORDER_ERROR,
-  CLEAR_ORDER_MESSAGES
-} from "../actions/types";
+import { GET_ORDERS, GOT_CUSTOMER_ORDERS } from "../actions/types";
 
 const initialState = {
   data: [],
-  revenue: 0
+  revenue: 0,
+  customer_orders: [],
+  credit: 0
 };
 
 export default function(state = initialState, action) {
@@ -17,6 +14,12 @@ export default function(state = initialState, action) {
         ...state,
         data: action.payload.orders,
         revenue: action.payload.revenue
+      };
+    case GOT_CUSTOMER_ORDERS:
+      return {
+        ...state,
+        customer_orders: action.payload.orders,
+        credit: action.payload.credit
       };
     default:
       return state;

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { createMeal, clearMealMessages } from "../actions/meals";
 import "react-toastify/dist/ReactToastify.css";
 
-class CreateMeal extends React.Component {
+export class CreateMeal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -63,6 +63,7 @@ class CreateMeal extends React.Component {
 
           <div className="form-group mb-3">
             <input
+              id="meal_option"
               type="text"
               className="form-control"
               name="meal_option"

@@ -1,38 +1,28 @@
 import React, { Component } from "react";
-import "../index.css";
-
+import { getCustomerOrders } from "../actions/orders";
 import { connect } from "react-redux";
-import { getOrders } from "../actions/orders";
 
-export class Order extends React.Component {
+export class CustomerOrder extends React.Component {
   componentDidMount() {
-    this.props.getOrders();
+    this.props.getCustomerOrders();
   }
   render() {
-    const revenue = this.props.revenue;
-    const orders = this.props.orders.map(order => {
+    const credit = this.props.credit;
+    const orders = this.props.my_orders.map(order => {
       return (
         <div key={order.id} className="card order-card">
-          <div className="card-header row">
-            <div className="col-md-9">
-              Order by <code>{order.details.customer}</code>
-            </div>
-
-            <div className="col-md-3">
-              <kbd class="text-center btn-block bg-primary">
-                {order.order_number} plates ordered
-              </kbd>
-            </div>
-          </div>
           <div className="card-body">
             <div className="row">
               <div className="col-md-5">
                 <h6 className="card-title">
-                  Ordered for{" "}
+                  This order is for{" "}
                   <span className="text-info">
                     {order.details.day}, {order.details.date}
                   </span>
                 </h6>
+                <kbd class="btn-block text-center bg-primary">
+                  You ordered {order.order_number} plates
+                </kbd>
               </div>
               <div className="col-md-3">
                 <div className="card-text">
@@ -57,8 +47,7 @@ export class Order extends React.Component {
         <div className="card order-card">
           <div className="card-header text-center display-4">
             <strong>
-              {this.props.orders.length} orders worth <code>{revenue}</code>{" "}
-              have been made
+              You have made {orders.length} orders worth <code>{credit}</code>
             </strong>
           </div>
         </div>
@@ -69,13 +58,14 @@ export class Order extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state.orders.customer_orders);
   return {
-    orders: state.orders.data,
-    revenue: state.orders.revenue
+    my_orders: state.orders.customer_orders,
+    credit: state.orders.credit
   };
 };
 
 export default connect(
   mapStateToProps,
-  { getOrders }
-)(Order);
+  { getCustomerOrders }
+)(CustomerOrder);

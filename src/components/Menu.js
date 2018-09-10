@@ -7,7 +7,7 @@ import { createOrder, clearOrderMessages } from "../actions/orders";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-class Menu extends React.Component {
+export class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.orderMade = this.orderMade.bind(this);
@@ -109,6 +109,7 @@ class Menu extends React.Component {
                         ) ? (
                           <div className="col-md-6">
                             <a
+                              id="bo-1"
                               className="btn hover-orange btn-block order-button"
                               href=""
                               role="button"
@@ -129,6 +130,7 @@ class Menu extends React.Component {
                           <div className="col-md-6 row">
                             <div className="col-md-6">
                               <input
+                                id="bo-input"
                                 type="number"
                                 name="order_number"
                                 className="form-control order-button-proceed"
@@ -140,6 +142,7 @@ class Menu extends React.Component {
                             </div>
                             <div className="col-md-6">
                               <a
+                                id="bo-2"
                                 href=""
                                 className="btn hover-orange btn-block order-button"
                                 role="button"
@@ -201,6 +204,7 @@ class Menu extends React.Component {
                         ) ? (
                           <div className="col-md-6">
                             <a
+                              id="lo-1"
                               className="btn hover-orange btn-block order-button"
                               href=""
                               role="button"
@@ -232,6 +236,7 @@ class Menu extends React.Component {
                             </div>
                             <div className="col-md-6">
                               <a
+                                id="lo-2"
                                 href=""
                                 className="btn hover-orange btn-block order-button"
                                 role="button"
@@ -293,6 +298,7 @@ class Menu extends React.Component {
                         ) ? (
                           <div className="col-md-6">
                             <a
+                              id="do-1"
                               className="btn hover-orange btn-block order-button"
                               href=""
                               role="button"
@@ -324,6 +330,7 @@ class Menu extends React.Component {
                             </div>
                             <div className="col-md-6">
                               <a
+                                id="do-2"
                                 href=""
                                 className="btn hover-orange btn-block order-button"
                                 role="button"
@@ -386,6 +393,7 @@ class Menu extends React.Component {
                         ) ? (
                           <div className="col-md-6">
                             <a
+                              id="so-1"
                               className="btn hover-orange btn-block order-button"
                               href=""
                               role="button"
@@ -417,6 +425,7 @@ class Menu extends React.Component {
                             </div>
                             <div className="col-md-6">
                               <a
+                                id="so-2"
                                 href=""
                                 className="btn hover-orange btn-block order-button"
                                 role="button"

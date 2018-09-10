@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/RrNn/book.svg?branch=test-the-app)](https://travis-ci.org/RrNn/book)
+[![Coverage Status](https://coveralls.io/repos/github/RrNn/book/badge.svg?branch=test-the-app&service=github)](https://coveralls.io/github/RrNn/book?branch=test-the-app)
 [![Maintainability](https://api.codeclimate.com/v1/badges/de6a579359f5cd8380c1/maintainability)](https://codeclimate.com/github/RrNn/book/maintainability)
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).

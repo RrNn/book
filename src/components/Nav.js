@@ -3,30 +3,33 @@ import { NavLink } from "react-router-dom";
 import "../index.css";
 import { isBoolean } from "util";
 
-class Nav extends React.Component {
+export class Nav extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       is_admin: null
     };
   }
-  componentWillMount() {
-    // this.setState({ is_admin: localStorage.getItem("is_admin") });
+
+  signOut() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("is_admin");
+    window.location = "/";
   }
   componentDidMount() {
     this.setState({ is_admin: localStorage.getItem("is_admin") });
   }
-  componentDidMount;
-  render() {
-    const is_admin = localStorage.getItem("is_admin");
 
+  render() {
     var liStyle = {
-      listStyle: "none"
+      listStyle: "none",
+      color: "green"
     };
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <li className="nav-item" style={liStyle}>
-          <strong>BookAMeal</strong>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light bottom-shadow">
+        <li className="nav-item display-4" style={liStyle}>
+          <strong>Bookameal</strong>
           <span className="sr-only">(current)</span>
         </li>
         <button
@@ -49,6 +52,12 @@ class Nav extends React.Component {
               </NavLink>
               <span className="sr-only">(current)</span>
             </li>
+            <li className="nav-item">
+              <NavLink activeClassName="active" to="/my_orders">
+                My Orders
+              </NavLink>
+              <span className="sr-only">(current)</span>
+            </li>
             {/* Admin Specific Nav Items */}
             {this.state.is_admin === "true" ? (
               <ul className="navbar-nav mr-auto">
@@ -64,14 +73,19 @@ class Nav extends React.Component {
                 </li>
                 <li className="nav-item">
                   <NavLink activeClassName="active" to="/active_days">
-                    View Orders
+                    View Customer Orders
                   </NavLink>
                 </li>
               </ul>
             ) : null}
           </ul>
           <form className="form-inline my-2 my-lg-0">
-            <NavLink activeClassName="active" to="/signout">
+            <NavLink
+              id="signOut"
+              activeClassName="active"
+              to="/signout"
+              onClick={() => this.signOut()}
+            >
               Logout
             </NavLink>
           </form>

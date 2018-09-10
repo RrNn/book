@@ -4,9 +4,14 @@ import CreateMeal from "./CreateMeal";
 import EditMeal from "./EditMeal";
 
 import { connect } from "react-redux";
-import { getMeals, editMealInitialised, deleteMeal } from "../actions/meals";
+import {
+  getMeals,
+  editMealInitialised,
+  clearMealMessages,
+  deleteMeal
+} from "../actions/meals";
 
-class Meal extends React.Component {
+export class Meal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +29,6 @@ class Meal extends React.Component {
     this.props.deleteMeal(meal_id);
   }
   startMealEdit(evt, meal_id, meal_option, meal_option_price) {
-    // remove the link in react-router later
     evt.preventDefault();
     let data = {
       meal_id,
@@ -47,6 +51,7 @@ class Meal extends React.Component {
     });
     this.hideMessages();
   }
+
   hideMessages() {
     setTimeout(() => {
       this.setState({
@@ -55,6 +60,7 @@ class Meal extends React.Component {
         delete_success: "",
         delete_error: ""
       });
+      this.props.clearMealMessages();
     }, 5000);
   }
 
@@ -71,6 +77,7 @@ class Meal extends React.Component {
             </div>
             <div className="col-md-3">
               <a
+                id="edit_meal"
                 href={"/edit_meal/" + meal.id}
                 className="text-info"
                 onClick={evt =>
@@ -87,6 +94,7 @@ class Meal extends React.Component {
             </div>
             <div className="col-md-3">
               <a
+                id="delete_meal"
                 href={"/delete_meal/" + meal.id}
                 className="text-danger"
                 onClick={evt => this.deleteMeal(evt, meal.id)}
@@ -153,5 +161,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { getMeals, editMealInitialised, deleteMeal }
+  { getMeals, editMealInitialised, clearMealMessages, deleteMeal }
 )(Meal);

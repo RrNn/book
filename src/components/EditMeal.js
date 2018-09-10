@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { editMeal, finishEdit, clearMealMessages } from "../actions/meals";
 
-class EditMeal extends React.Component {
+export class EditMeal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -49,6 +49,7 @@ class EditMeal extends React.Component {
           <legend className="text-center">Edit {this.state.meal_option}</legend>
           <div className="form-group mb-3">
             <input
+              id="meal_option"
               type="text"
               className="form-control"
               name="meal_option"
@@ -78,9 +79,9 @@ class EditMeal extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  meal: state.meals.meal_to_edit
-  //   success_message: state.meals.edit_success_message,
-  //   error_message: state.meals.edit_error_message
+  meal: state.meals.meal_to_edit,
+  success_message: state.meals.edit_success_message,
+  error_message: state.meals.edit_error_message
 });
 
 export default connect(
